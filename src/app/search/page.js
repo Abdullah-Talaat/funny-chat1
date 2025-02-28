@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot } from "firebase/firestore"
 import Link from "next/link"
 export default function Search() {
-    const [searchP, setSearchP] = useState(null)
+    const [searchP, setSearchP] = useState("")
     const { user } = useContext(UseUser)
     const [search, setSearch] = useState("")
     const [resSearch, setResSearch] = useState([])
@@ -41,7 +41,7 @@ export default function Search() {
     
 const handleSearchP = () => {
         const result = privateUsers.filter(user => 
-            user.userNum.toString() === searchP.toString()
+            user.userNum === searchP
         );
         console.log(result)
         setResP([...result]);
@@ -97,6 +97,9 @@ const handleSearchP = () => {
                     )}
                 </div>
             </div>
+            <hr></hr>
+            <hr></hr>
+                <h1>search in private Accounts</h1>
             <div className="list-of-friends search-bar">
                 <input  
                     value={searchP} 
@@ -107,7 +110,6 @@ const handleSearchP = () => {
 
                 <button onClick={handleSearchP} className="btn s-btn">Search</button>
             </div>
-            <h1>search in private Accounts</h1>
             <div className="result-of-search s list-of-friends">
                 <h3>Result of search</h3>
                 <div className="list">

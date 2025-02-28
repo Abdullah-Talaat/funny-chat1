@@ -141,7 +141,7 @@ export default function SignUp() {
 }}>
   {({ open }) => (
     <button className="button" onClick={() => open()}>
-      Upload
+      Upload your profile photo
     </button>
   )}
 </CldUploadWidget>

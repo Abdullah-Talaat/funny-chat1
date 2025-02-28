@@ -53,6 +53,7 @@ export default function LogIn() {
                     password: "",   
                 })
                 alert("done")
+                window.location.href = "/chats"
             }
             else {
                 alert("user not found")

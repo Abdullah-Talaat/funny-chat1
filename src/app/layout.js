@@ -6,8 +6,7 @@ import Head from "./coms/head";
 import Loading from "./coms/loading";
 import { createContext, useEffect, useState } from "react";
 import { db } from "./firebase/firebase_confage";
-import { collection, onSnapshot } from "firebase/firestore";
-
+import { collection, onSnapshot } from "firebase/firestore"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

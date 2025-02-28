@@ -5,9 +5,16 @@ import Link from "next/link"
 import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot, doc, updateDoc} from "firebase/firestore"
 
-export default function Profile() {
-    const [friends, setFriends] = useState([])
-    const { user } = useContext(UseUser)
+export const handleShare = () => {
+    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!"
+    updateDoc(doc(db, "users", user.id),{score:user.score + 100})
+    .then(() => {
+        alert("score update")
+    })
+}
+    export default function Profile() {
+        const [friends, setFriends] = useState([])
+        const { user } = useContext(UseUser)
 
     useEffect(() => {
         if (!user || !user.userFriends) return;
@@ -28,20 +35,6 @@ export default function Profile() {
             unsubscribes.forEach(unsub => unsub());
         };
     }, [user]);
-    const handleShare = () => {
-        window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!"
-        alert("App shared successfully!")
-
-        /*doc(db, "users", user.id).update({
-            score: user.score + 100,
-        })*/
-        updateDoc(doc(db, "users", user.id),{score:user.score + 100})
-        .then(() => {
-            alert("score update")
-        })
-        
-    
-    }
     return (
         <main className="m-p">
             <div className="userProfile">
@@ -56,6 +49,7 @@ export default function Profile() {
                 <h3>your friends</h3>
                 <hr />
                 <div className="list">
+                    <hr></hr>
                     {friends.map((friend) => (
                         <Link key={friend.id} href={`/profile_anther/${friend.id}`}>
                         <div className="friend" key={friend.id}>
@@ -69,6 +63,7 @@ export default function Profile() {
                         </div>
                         </Link>
                     ))}
+                    <hr></hr>
                 </div>
             </div>
 
@@ -87,6 +82,13 @@ export default function Profile() {
                 <div className="share-btn" onClick={handleShare}>
                 Share Now
                 </div>
+            </div>
+            <div className="log-out">
+                <button style={{ marginTop: "20px", padding: "10px 20px", background: "red", color: "#fff", border: "none", borderRadius: "5px" }} className="btn" onClick={() => {
+                    localStorage.removeItem("user_token")
+                    window.location.href = "/log_in"
+                    user.userOk = false
+                }}>log out</button>
             </div>
         </main>
     )

@@ -1,7 +1,9 @@
+import Loder from "./loder";
+
 export default function Loading() {
     return (
         <div className="loading">
-            loading......
+            <span className="loader"></span>
         </div>
     )
 }

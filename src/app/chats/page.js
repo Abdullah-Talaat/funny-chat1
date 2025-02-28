@@ -23,7 +23,7 @@ export default function Chats() {
     
     return (
         <main>
-          <h1>Your Chats</h1>
+          <h1 style={{textAlign:"center", paddingTop:"20px", paddingBottom:"20px"}}>Your Chats</h1>
           <div className="list">
             {users.map((user1) => (
                 <Link href={`/chat/${user1.id}`} key={user1.id}>
