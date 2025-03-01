@@ -70,7 +70,7 @@ export default function SignUp() {
                     userToken:userToken,
                     userOk:true
                 })
-                alert("you have signed up, go to chats page")
+                alert("you have signed up, go to search page yo make friends")
                 setUserData({
                     userName: "",
                     userNum: 0,
