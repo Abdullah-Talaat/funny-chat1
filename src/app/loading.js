@@ -1,4 +1,4 @@
-import Loder from "./loder";
+
 
 export default function Loading() {
     return (

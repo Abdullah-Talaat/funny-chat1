@@ -1,12 +1,15 @@
 "use client"
 import { UseUser } from "../layout"
-import { useEffect, useContext, useState } from "react"
+import { useEffect, useContext, useState, Suspense } from "react"
 import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot } from "firebase/firestore"
 import Link from "next/link"
+import Loder from "../coms/loder"
+import SH from "../coms/should_log"
 
 export default function Chats() {
     const {user} = useContext(UseUser)
+    if (!user.userOk) return <SH/>
     const [users, setUsers] = useState([])
     // console.log(user.userFriends)
     useEffect(() => {
@@ -24,8 +27,9 @@ export default function Chats() {
     return (
         <main>
           <h1 style={{textAlign:"center", paddingTop:"20px", paddingBottom:"20px"}}>Your Chats</h1>
+          <Suspense fallback={<Loder/>}>
           <div className="list">
-            {users.map((user1) => (
+            {users.length != 0 ? (users.map((user1) => (
                 <Link href={`/chat/${user1.id}`} key={user1.id}>
                     <div className="friend">
                         <div className="dm wd">
@@ -38,8 +42,16 @@ export default function Chats() {
                     </div> 
                     <hr></hr>   
                 </Link>
-            ))}
+            ))) :
+        (
+            <>
+                <p>you don't have any friends</p>
+                <Link href={"/search"} className="link">search for friends</Link>
+            </>
+        )
+            }
           </div>   
+          </Suspense>
         </main>
     )
 }

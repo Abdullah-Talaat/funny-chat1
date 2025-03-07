@@ -3,7 +3,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Head from "./coms/head";
-import Loading from "./coms/loading";
+import Loading from "./loading";
 import { createContext, useEffect, useState } from "react";
 import { db } from "./firebase/firebase_confage";
 import { collection, onSnapshot } from "firebase/firestore"
@@ -18,7 +18,13 @@ const geistMono = Geist_Mono({
 });
 
 export const UseUser = createContext(null);
-
+export const matadata = {
+  title: "Funny Chat",
+  description: "Funny Chat is a chat app that allows you to chat with your friends",
+  icons:{
+    icon:"./logo.svg"
+  }
+};
 export default function RootLayout({ children }) {
   const [user, setUser] = useState({
     userOk: false,

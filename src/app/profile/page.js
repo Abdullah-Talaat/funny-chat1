@@ -4,9 +4,10 @@ import { UseUser } from "../layout"
 import Link from "next/link"
 import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot, doc, updateDoc} from "firebase/firestore"
+import SH from "../coms/should_log"
 
 export const handleShare = () => {
-    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!"
+    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!\nhttps://abdullah-t-funny-chat-hjni.vercel.app/ "
     updateDoc(doc(db, "users", user.id),{score:user.score + 100})
     .then(() => {
         alert("score update")
@@ -15,7 +16,7 @@ export const handleShare = () => {
     export default function Profile() {
         const [friends, setFriends] = useState([])
         const { user } = useContext(UseUser)
-
+        if(user.userOk === false) return (<SH/>)
     useEffect(() => {
         if (!user || !user.userFriends) return;
         
@@ -35,6 +36,7 @@ export const handleShare = () => {
             unsubscribes.forEach(unsub => unsub());
         };
     }, [user]);
+    
     return (
         <main className="m-p">
             <div className="userProfile">

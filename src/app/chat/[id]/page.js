@@ -1,11 +1,14 @@
  "use client"
 
 import { collection, onSnapshot, getDoc, doc, addDoc, query, orderBy } from "firebase/firestore"
-import { useState, useEffect, useContext , useRef} from "react"
+import { useState, useEffect, useContext , useRef, Suspense} from "react"
 import { useParams } from "next/navigation"
 import { UseUser } from "@/app/layout"
 import { db } from "@/app/firebase/firebase_confage"
 import Link from "next/link"
+import Loading from "@/app/loading"
+import Loder from "@/app/coms/loder"
+
 
 export default function Chat_P() {
   const lastMessageRef = useRef(null)
@@ -25,7 +28,8 @@ export default function Chat_P() {
     msgKey: "",
     msgData: ""
   })
-
+  const [stickM , setStickM] = useState(false)
+  const [stickers, setStickers] = useState([])
   useEffect(() => {
     getDoc(doc(db, "users", id)).then((docSnap) => {
       if (docSnap.exists()) {
@@ -51,6 +55,19 @@ export default function Chat_P() {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" })
     }
   }, [chat])
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, "stickers_level_1"), (snapshot) => {
+      const fetchedStickers = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+      setStickers(fetchedStickers)
+      return () => unsubscribe()
+    })
+
+  }, [])
+
+  
   const handleSubmit = async () => {
     if (!msgData.msgContant.trim()) {
       alert("Please fill in the required fields.")
@@ -60,13 +77,13 @@ export default function Chat_P() {
     const date = new Date()
     const time = date.toLocaleTimeString()
     const date1 = date.toLocaleDateString()
-    const date2 = `${time}  ${date1}`
-
+    const date2 = `${time}/${date1}`
     await addDoc(collection(db, "allPrivateChats"), {
       from: user.id,
       to: id,
       msgContant: msgData.msgContant,
       msgKey: `${user.id}-a-m-123-${id}`,
+      type: "text",
       msgData: date2
     })
 
@@ -78,7 +95,30 @@ export default function Chat_P() {
       msgData: ""
     })
   }
+  if(user.userOk === false) return (
+    <>you should go to <Link href={"/log_in"} style={{
+      color:"blue"
+    }}>log in</Link> or <Link href={"/sign_up"} style={{
+      color:"blue"
+    }}>sign up</Link></>
+  )
+  const handleSticker = (url) => {
+    setStickM(false)
+    const date = new Date()
+    const time = date.toLocaleTimeString()
+    const date1 = date.toLocaleDateString()
+    const date2 = `${time}/${date1}`
+    addDoc(collection(db, "allPrivateChats"), {
+      from: user.id,
+      to: id,
+      msgContant: url,
+      msgKey: `${user.id}-a-m-123-${id}`,
+      type: "img",
+      msgData: date2}
+      )
+  }
 
+                console.log(stickers)
   return (
     <main>
       <div className="list">
@@ -96,9 +136,12 @@ export default function Chat_P() {
         </Link>
       </div>
 
+      <Suspense fallback={<Loder/>} >
       <div className="chat-c">
-        {chat ? ( chat.map((message, index) => (
-          message.from === user.id && message.to === id ? (
+        {chat.map((message, index) => (
+          
+          message.type == "text" ? (
+            message.from === user.id && message.to === id ? (
             <div key={message.id} className="chat-c-1" ref={index == chat.length - 1 ? lastMessageRef : null}>
               <div className="c-1">{message.msgContant}</div>
               <div className="date">{message.msgData}</div>
@@ -108,10 +151,26 @@ export default function Chat_P() {
               <div className="date">{message.msgData}</div>
               <div className="c-2">{message.msgContant}</div>
             </div>
-          ) : null
-        ))):
-        <p>Loading...</p>
-        }
+          ) : null): (
+            message.from === user.id && message.to === id ? (
+              <div key={message.id} className="chat-c-1" ref={index == chat.length - 1 ? lastMessageRef : null}>
+                <div className="c-1">
+                  <img className="mm" src={message.msgContant} alt="sticker" />
+                </div>
+                <div className="date">{message.msgData}</div>
+              </div>
+            ): (
+              message.from === id && message.to === user.id ? (
+                <div key={message.id} className="chat-c-2" ref={index == chat.length - 1 ? lastMessageRef : null}>
+                  <div className="date">{message.msgData}</div>
+                  <div className="c-2">
+                    <img className="mm" src={message.msgContant} alt="sticker" />
+                  </div>
+                </div>
+              ) : null
+            )
+          )
+        ))}
       </div>
 
       <div className="chat">
@@ -121,8 +180,26 @@ export default function Chat_P() {
           value={msgData.msgContant}
           placeholder="Write your message here"
         />
-        <button onClick={handleSubmit} className="btn">Send</button>
+        <div className ="btns">
+        <button onClick={handleSubmit} >Send</button>
+        <button  onClick={() => setStickM(!stickM)}>stick</button>
+        </div>
       </div>
+      <div style={stickM ?{
+        display:"flex"
+      }: {
+        display:"none"
+      }} className="stick">
+        {
+          stickers.map((sticker) => (
+            <div className="sticker" onClick={() => handleSticker(sticker.url)}>
+              <img src={sticker.url}></img>
+              <p>{sticker.name}</p></div>
+          ))
+        }
+        <button onClick={() => setStickM(0)} className="close">x</button>
+      </div>
+      </Suspense>
     </main>
   )
 }

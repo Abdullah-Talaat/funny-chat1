@@ -386,20 +386,29 @@ h1 {
   background-color: gray;
 }
 .chat textarea {
-  width: 80%;
+  width: 60%;
   height: 100%;
   border: none;
   outline-color:#2977F6 ;
   padding:5px;
   border-radius: 5px;
 }
-.chat button {
-  width: 10%;
+.chat .btns {
+  width: 25%;
   height: 100%;
   border: none;
   outline-color:#2977F6 ;
   padding:5px;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap:6px
+}
+.btns button {
+  background-color: #2977F6;
+  padding:3.5px;
+  border-radius: 4px;
 }
 input{
   color:white
@@ -476,35 +485,83 @@ border-radius: 15px;
 .form input{
   border-bottom: #fff 1.4px sold;
 }
+
+
 .loader {
-  width: 64px;
-  height: 48px;
-  position: relative;
-  animation: split 1s ease-in infinite alternate;
-}
-.loader::before , .loader::after {
-  content: '';
-  position: absolute;
-  height: 48px;
   width: 48px;
+  height: 48px;
   border-radius: 50%;
-  left: 0;
-  top: 0;
-  transform: translateX(-10px);
-  background: #FF3D00;
-  opacity: 0.75;
-  backdrop-filter: blur(20px);
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
 }
 
-.loader::after {
-  left: auto;
-  right: 0;
-  background: #FFF;
-  transform: translateX(10px);
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
 }
 
-@keyframes split {
- 0% , 25%{ width: 64px }
- 100%{ width: 148px }
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
-  
+
+.link {
+  color:blue;
+  font-size: medium;
+  background-color: #fff;
+  text-decoration:dotted;
+  display: inline;
+}
+
+
+.stick{
+  margin: 20px 5px;
+  height: 50%;
+  border-radius: 7px;
+  width:100vw;
+  background-color: #222;
+  position: fixed;
+  overflow-y: auto;
+  display:flex;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
+  padding: 20px;
+  gap: 20px;
+  /* align-items: center; */
+  gap:15px;
+  padding:15px;
+}
+.sticker {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background:#555;
+  border-radius: 5px;
+  padding: 3px;
+  height: 80px;
+}
+.sticker img{
+  height:50px;
+  width:50px;
+}
+
+.mm {
+  max-width :70px;
+  max-height: 70px;
+}
+.close{
+  width:100%;
+
+}

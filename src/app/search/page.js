@@ -4,6 +4,7 @@ import { UseUser } from "../layout"
 import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot } from "firebase/firestore"
 import Link from "next/link"
+import SH from "../coms/should_log"
 export default function Search() {
     const [searchP, setSearchP] = useState("")
     const { user } = useContext(UseUser)
@@ -12,7 +13,7 @@ export default function Search() {
     const [resP, setResP] = useState([])
     const [privateUsers, setPrivateUsers] = useState([])
     const [piplucUsers, setPiplucUsers] = useState([])
-
+    if(!user.userOk) return (<SH/>)
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
             const fetchedUsers = snapshot.docs.map((doc) => ({
@@ -41,7 +42,7 @@ export default function Search() {
     
 const handleSearchP = () => {
         const result = privateUsers.filter(user => 
-            user.userNum === searchP
+            user.userNum.toString() === searchP.toString()
         );
         console.log(result)
         setResP([...result]);

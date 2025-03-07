@@ -1,10 +1,12 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Suspense } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { db } from "@/app/firebase/firebase_confage";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { UseUser } from "@/app/layout";
 import Link from "next/link"
+import Loder from "@/app/coms/loder";
+import SH from "@/app/coms/should_log";
 export default function Anther_Profile() {
     const { user } = useContext(UseUser);
     const { id } = useParams();
@@ -12,7 +14,7 @@ export default function Anther_Profile() {
     const [user11, setUser11] = useState(null);
     const [friendMode, setFriendMode] = useState(false);
     const [friends, setFriends] = useState([]);
-
+    if(user.userOk === false) return (<SH/>)
     // جلب بيانات المستخدم
     useEffect(() => {
         if (!id) return;
@@ -113,8 +115,18 @@ export default function Anther_Profile() {
             </main>
         );
     }
-
+    if(user.userOK == false) (
+        <>
+            you should go to <Link style={{
+                color:"blue"  
+            }} href={"/log_in"}>log in</Link>
+            or <Link style={{
+                color:"blue"
+            }} href={"/sign_up"}>sign_up</Link>
+        </>
+    )
     return (
+        <Suspense fallback={<Loder/>}>
         <main className="m-p">
             <div className="userProfile">
                 <div className="dm">
@@ -158,5 +170,6 @@ export default function Anther_Profile() {
                 <h4>Her/Him Mode: <b>{user11?.mode ? "Public" : "Private"}</b></h4>
             </div>
         </main>
+        </Suspense>
     );
 }
