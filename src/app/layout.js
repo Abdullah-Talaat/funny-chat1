@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -7,34 +7,31 @@ import Loading from "./loading";
 import { createContext, useEffect, useState } from "react";
 import { db } from "./firebase/firebase_confage";
 import { collection, onSnapshot } from "firebase/firestore"
+/*
+export const metadata = {
+  title: "Funny Chat",
+  description: "Funny Chat is a chat app that allows you to chat with your friends",
+};*/
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
-
+})
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 export const UseUser = createContext(null);
-export const matadata = {
-  title: "Funny Chat",
-  description: "Funny Chat is a chat app that allows you to chat with your friends",
-  icons:{
-    icon:"./logo.svg"
-  }
-};
+
 export default function RootLayout({ children }) {
   const [user, setUser] = useState({
     userOk: false,
     userName: "o",
     userNum: 0,
-    password: " ",
     score: 100,
     userPhoto: " ",
     mode: false,
-    userToken: " ",
     userFriends: [],
   });
 
@@ -89,6 +86,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <title>funny chat</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:title" content="funny chat" />
+        <meta name="description" content="Funny Chat is a chat app that allows you to chat with your friends with emojis and stickers and funny " />
+      </head>
       <UseUser.Provider value={{ user, setUser }}>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Head />

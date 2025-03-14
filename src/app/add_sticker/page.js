@@ -19,7 +19,7 @@ export default function Add_Sticker() {
             <input className="input" value={sticker.score} onChange={(e)=>setSticker({...sticker, score:e.target.value})} placeholder="add score"></input>
             
             <CldUploadWidget uploadPreset={uploadPreset} onSuccess={(result) => {
-                console.log(result)
+                
                 result.event === "success" ? setSticker({...sticker, url:result.info.secure_url}) : console.log("thth")
             }}>
                 {({open})=>(

@@ -24,9 +24,9 @@ export default function LogIn() {
             return () => unsubscribe()
         })
     }, [])
-    console.log(users)
+    
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         if (userLoginData.userNum == null || userLoginData.password == "") {
             alert("Please fill in all the required fields.")
             return
@@ -43,9 +43,15 @@ export default function LogIn() {
             })
             if (userFound) {
                 localStorage.setItem("user_token", userData.userToken)
-                console.log(localStorage.getItem("user_token"))
+                
                 setUser({
-                    ...userData,
+                    userNum: userData.userNum,
+                    userName: userData.userName,
+                    userPhoto: userData.userPhoto,
+                    userFriends: userData.userFriends,
+                    score: userData.score,
+                    mode: userData.mode,
+                    id:userData.id,
                     userOk:true
                 })
                 setUserLoginData({

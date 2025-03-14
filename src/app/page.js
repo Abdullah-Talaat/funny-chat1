@@ -1,11 +1,20 @@
 "use client"
 import { useState, useEffect, useContext } from "react"
+import { db } from "./firebase/firebase_confage"
+import { updateDoc , doc} from "firebase/firestore";
 import { UseUser } from "./layout"
 import Link from "next/link"
-import { handleShare } from "../app/profile/page"
-export default async function Home() {
+// import { handleShare } from "../app/profile/page"
+export default function Home() {
+  const handleShare = () => {
+    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/ "
+    updateDoc(doc(db, "users", user.id),{score:user.score + 100})
+    .then(() => {
+      alert("score update")
+    })
+  }
   const {user} = useContext(UseUser)
-  console.log(user)
+  
   return (
     <main>
       <div className="home">
@@ -21,10 +30,16 @@ export default async function Home() {
           </>
         )}
         </div>
-        <div className="share-app">
+        {user.userOk ? (
+          <div className="share-app">
           <h3>share app to get points!!</h3>
           <button onClick={handleShare} className="share-btn">Share Now</button>
         </div>
+        ) : (
+          <div></div>
+        )
+        
+        }
       </div>
     </main>
   )

@@ -37,7 +37,7 @@ export default function SignUp() {
 
     const {user, setUser} = useContext(UseUser)
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         if (!userData.userName || !userData.userNum || !userData.password) {
             alert("Please fill in all the required fields.")
             return
@@ -55,7 +55,7 @@ export default function SignUp() {
             else{
                 
                 const userToken = `user_token,${userData.userNum},${userData.password}`
-                await addDoc(collection(db, "users"), {
+                addDoc(collection(db, "users"), {
                     ...userData,
                     mode:mode,
                     userPhoto:photoUrl,
@@ -64,7 +64,11 @@ export default function SignUp() {
                 alert("user added")
                 console.log("done")
                 setUser({
-                    ...userData,
+                    userName:userData.userName,
+                    userNum:userData.userNum,
+                    id:userData.id,
+                    score:userData.score,
+                    userFriends:userData.userFriends,
                     mode:mode,
                     userPhoto:photoUrl,
                     userToken:userToken,
@@ -81,7 +85,7 @@ export default function SignUp() {
                 
                 setMode(false)
                 localStorage.setItem("user_token", userToken)
-                console.log(localStorage.getItem("user_token"))
+            
             }
         }
     }

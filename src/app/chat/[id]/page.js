@@ -68,7 +68,7 @@ export default function Chat_P() {
   }, [])
 
   
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!msgData.msgContant.trim()) {
       alert("Please fill in the required fields.")
       return
@@ -78,7 +78,7 @@ export default function Chat_P() {
     const time = date.toLocaleTimeString()
     const date1 = date.toLocaleDateString()
     const date2 = `${time}/${date1}`
-    await addDoc(collection(db, "allPrivateChats"), {
+   addDoc(collection(db, "allPrivateChats"), {
       from: user.id,
       to: id,
       msgContant: msgData.msgContant,
@@ -118,7 +118,7 @@ export default function Chat_P() {
       )
   }
 
-                console.log(stickers)
+              
   return (
     <main>
       <div className="list">

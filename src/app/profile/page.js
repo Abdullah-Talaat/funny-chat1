@@ -5,17 +5,18 @@ import Link from "next/link"
 import { db } from "../firebase/firebase_confage"
 import { collection, onSnapshot, doc, updateDoc} from "firebase/firestore"
 import SH from "../coms/should_log"
+import Router from "next/router"
 
-export const handleShare = () => {
-    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!\nhttps://abdullah-t-funny-chat-hjni.vercel.app/ "
-    updateDoc(doc(db, "users", user.id),{score:user.score + 100})
-    .then(() => {
+export default function Profile() {
+    const { user } = useContext(UseUser)
+    const handleSearch = () => {
+        const herf1 = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/ "
+        location.herf = herf1
+        updateDoc(doc(db, "users", user.id),{score:user.score + 100})
+        .then(() => {
         alert("score update")
-    })
-}
-    export default function Profile() {
+    })}
         const [friends, setFriends] = useState([])
-        const { user } = useContext(UseUser)
         if(user.userOk === false) return (<SH/>)
     useEffect(() => {
         if (!user || !user.userFriends) return;
@@ -81,7 +82,7 @@ export const handleShare = () => {
 
             <div className="share-app">
                 <h3>share app with your friends to get points!!</h3>
-                <div className="share-btn" onClick={handleShare}>
+                <div className="share-btn" onClick={handleSearch}>
                 Share Now
                 </div>
             </div>
