@@ -76,7 +76,7 @@ export default function SignUp() {
                     userToken:userToken,
                     userOk:true
                 })
-                alert("you have signed up, go to search page to make friends")
+                alert("you have signed up, .go to search page to make friends")
                 setUserData({
                     userName: "",
                     userNum: 0,
