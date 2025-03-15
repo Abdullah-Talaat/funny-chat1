@@ -7,7 +7,7 @@ import Link from "next/link"
 // import { handleShare } from "../app/profile/page"
 export default function Home() {
   const handleShare = () => {
-    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/ "
+    window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/share "
     updateDoc(doc(db, "users", user.id),{score:user.score + 100})
     .then(() => {
       alert("score update")

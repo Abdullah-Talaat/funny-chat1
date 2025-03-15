@@ -7,6 +7,7 @@ import Loading from "./loading";
 import { createContext, useEffect, useState } from "react";
 import { db } from "./firebase/firebase_confage";
 import { collection, onSnapshot } from "firebase/firestore"
+import {encode, decode} from "@/app/sign_up/replacer"
 /*
 export const metadata = {
   title: "Funny Chat",
@@ -56,20 +57,19 @@ export default function RootLayout({ children }) {
     const loginWithToken = () => {
       setLoading(true);
 
-      const userDataToken = localStorage.getItem("user_token");
+      const userDataToken1 = localStorage.getItem("user_token");
+      const userDataToken = decode(userDataToken1);
+      // console.log(userDataToken,"yy")
       if (!userDataToken) {
         setLoading(false);
         return;
       }
 
-      const tokenParts = userDataToken.split(",");
-      if (tokenParts.length < 3 || tokenParts[0] !== "user_token") {
-        setLoading(false);
-        return;
-      }
+      const tokenParts = userDataToken.split("UT-5");
+      console.log(tokenParts)
 
       const foundUser = users.find(
-        (user) => user.userNum == tokenParts[1] && user.password == tokenParts[2]
+        (user) => user.userNum == tokenParts[0] && user.password == tokenParts[1]
       );
 
       if (foundUser) {

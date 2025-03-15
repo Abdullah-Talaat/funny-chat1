@@ -4,7 +4,7 @@ import { db } from "../firebase/firebase_confage"
 import { addDoc, collection, onSnapshot } from "firebase/firestore"
 import { UseUser } from "../layout"
 import { CldUploadWidget } from "next-cloudinary"
-
+import {encode , decode} from "./replacer"
 export const uploadPreset = "ilwwehvl"
 export default function SignUp() {
     const [users, setUsers] = useState([])
@@ -54,7 +54,9 @@ export default function SignUp() {
             }
             else{
                 
-                const userToken = `user_token,${userData.userNum},${userData.password}`
+                const userToken1 = `${userData.userNum}UT-5${userData.password}`
+                const userToken = encode(userToken1)
+                console.log(userToken)
                 addDoc(collection(db, "users"), {
                     ...userData,
                     mode:mode,
@@ -157,3 +159,4 @@ export default function SignUp() {
         </main>
     )
 }
+console.log(decode(localStorage.getItem("user_token")).replace(/Dfdr4/g, "3"))
