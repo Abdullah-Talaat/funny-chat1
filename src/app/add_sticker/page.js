@@ -23,7 +23,7 @@ export default function Add_Sticker() {
             
             <CldUploadWidget uploadPreset={uploadPreset} onSuccess={(result) => {
                 
-                result.event === "success" ? setSticker({...sticker, url:result.info.secure_url}) : console.log("thth")
+                result.event === "success" ? setSticker({...sticker, url:result.info.secure_url}) : //("thth")
             }}>
                 {({open})=>(
                     <button onClick={open}>upload sticker</button>

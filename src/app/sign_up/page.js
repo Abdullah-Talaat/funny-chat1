@@ -56,7 +56,7 @@ export default function SignUp() {
                 
                 const userToken1 = `${userData.userNum}UT-5${userData.password}`
                 const userToken = encode(userToken1)
-                console.log(userToken)
+                //(userToken)
                 addDoc(collection(db, "users"), {
                     ...userData,
                     mode:mode,
@@ -64,7 +64,7 @@ export default function SignUp() {
                     userToken:userToken
                 })
                 alert("user added")
-                console.log("done")
+                //("done")
                 setUser({
                     userName:userData.userName,
                     userNum:userData.userNum,
@@ -92,7 +92,7 @@ export default function SignUp() {
         }
     }
 
-    console.log(photoUrl)
+    //(photoUrl)
     return (
         <main className="m-s-u">
             <title>sign up</title>
@@ -142,7 +142,7 @@ export default function SignUp() {
     <CldUploadWidget uploadPreset={uploadPreset} onSuccess={(result) => {
     if (result.event === "success") {
         setPhotoUrl(result.info.secure_url);
-        console.log(result.info.secure_url)
+        //(result.info.secure_url)
         // setUserData(prev => ({ ...prev, userPhoto: result.info.secure_url }));
     }
 }}>
@@ -159,4 +159,4 @@ export default function SignUp() {
         </main>
     )
 }
-console.log(decode(localStorage.getItem("user_token")).replace(/Dfdr4/g, "3"))
+// //(decode(localStorage.getItem("user_token")).replace(/ Dfdr4 /g, "3"))

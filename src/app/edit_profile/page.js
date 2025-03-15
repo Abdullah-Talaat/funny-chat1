@@ -49,7 +49,7 @@ export default function Edit_profile() {
                 </div>
                 <CldUploadWidget uploadPreset={uploadPreset} onSuccess={(result) => {
 
-                    result.event = "success"? setPhotoUrl(result.info.secure_url) : console.log("thth")
+                    result.event = "success"? setPhotoUrl(result.info.secure_url) : //("thth")
                 }}>
                     {({ open }) => (<button onClick={open}>Change photo</button>)}
                 </CldUploadWidget>

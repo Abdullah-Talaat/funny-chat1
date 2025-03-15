@@ -56,21 +56,21 @@ export default function RootLayout({ children }) {
 
     const loginWithToken = () => {
       setLoading(true);
-      if(localStorage.getItem("user_token") === null){
+      if(localStorage.getItem("user_token") === null  ){
         setLoading(false);
         return;
       }
-      // console.log(localStorage.getItem("user_token"))
+      // //(localStorage.getItem("user_token"))
       const userDataToken1 = localStorage.getItem("user_token");
       const userDataToken = decode(userDataToken1);
-      // console.log(userDataToken,"yy")
+      // //(userDataToken,"yy")
       if (!userDataToken) {
         setLoading(false);
         return;
       }
 
       const tokenParts = userDataToken.split("UT-5");
-      console.log(tokenParts)
+      //(tokenParts)
 
       const foundUser = users.find(
         (user) => user.userNum == tokenParts[0] && user.password == tokenParts[1]

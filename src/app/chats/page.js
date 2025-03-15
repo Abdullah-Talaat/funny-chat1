@@ -11,7 +11,7 @@ export default function Chats() {
     const {user} = useContext(UseUser)
     if (!user.userOk) return <SH/>
     const [users, setUsers] = useState([])
-    // console.log(user.userFriends)
+    // //(user.userFriends)
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, "users"), (snapshot) => {
             const fetchedUsers = snapshot.docs.filter((doc) => user.userFriends.includes(doc.id)).map((doc) => ({
