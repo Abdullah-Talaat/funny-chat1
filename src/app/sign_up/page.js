@@ -93,6 +93,7 @@ export default function SignUp() {
     console.log(photoUrl)
     return (
         <main className="m-s-u">
+            <title>sign up</title>
             <div className="form">
                 <div className="dm">
                     <img src={photoUrl}></img>

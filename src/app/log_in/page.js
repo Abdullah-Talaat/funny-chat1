@@ -69,6 +69,7 @@ export default function LogIn() {
     
     return (
         <main className="m-l-in">
+            <title>log in</title>
             <div className="form">
                 <input type="number" name="userNum" value={userLoginData.userNum} onChange={(e) => setUserLoginData({ ...userLoginData, userNum: e.target.value })} placeholder="Your number" />
                 <input type="password" name="password" value={userLoginData.password} onChange={(e) => setUserLoginData({ ...userLoginData, password: e.target.value })} placeholder="Your password" />

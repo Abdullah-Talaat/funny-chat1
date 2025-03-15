@@ -11,7 +11,7 @@ export default function Profile() {
     const { user } = useContext(UseUser)
     const handleSearch = () => {
         const herf1 = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/ "
-        location.herf = herf1
+        window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/ "
         updateDoc(doc(db, "users", user.id),{score:user.score + 100})
         .then(() => {
         alert("score update")
@@ -40,6 +40,7 @@ export default function Profile() {
     
     return (
         <main className="m-p">
+            <title>my profile</title>
             <div className="userProfile">
                 <div className="dm">
                     <img src={user?.userPhoto} alt="user photo" />

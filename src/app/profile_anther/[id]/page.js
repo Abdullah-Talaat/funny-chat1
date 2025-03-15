@@ -128,6 +128,7 @@ export default function Anther_Profile() {
     return (
         <Suspense fallback={<Loder/>}>
         <main className="m-p">
+            <title>funny chat | {user11.userName}</title>
             <div className="userProfile">
                 <div className="dm">
                     <img src={user11?.userPhoto} alt="user photo" />

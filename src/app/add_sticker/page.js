@@ -13,7 +13,10 @@ export default function Add_Sticker() {
     })
     const [password,setPassword] = useState("")
     return (
+
         <main>
+                <title>add sticker</title>
+            
             <input onChange={(e)=>setPassword(e.target.value)}  value = {password} className="input" placeholder="add password"></input>
             <input className="input" value={sticker.name} onChange={(e)=>setSticker({...sticker, name:e.target.value})} placeholder="add name"></input>
             <input className="input" value={sticker.score} onChange={(e)=>setSticker({...sticker, score:e.target.value})} placeholder="add score"></input>

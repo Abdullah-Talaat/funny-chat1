@@ -526,10 +526,10 @@ border-radius: 15px;
 
 
 .stick{
-  margin: 20px 5px;
   height: 50%;
   border-radius: 7px;
   width:100vw;
+  margin: 20px;
   background-color: #222;
   position: fixed;
   overflow-y: auto;
@@ -550,7 +550,8 @@ border-radius: 15px;
   background:#555;
   border-radius: 5px;
   padding: 3px;
-  height: 80px;
+  height: 65px;
+  border: #f0f0f0 solid 1.5px;
 }
 .sticker img{
   height:50px;

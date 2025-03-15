@@ -26,6 +26,9 @@ export default function Chats() {
     
     return (
         <main>
+            
+                <title>Chats</title>
+        
           <h1 style={{textAlign:"center", paddingTop:"20px", paddingBottom:"20px"}}>Your Chats</h1>
           <Suspense fallback={<Loder/>}>
           <div className="list">

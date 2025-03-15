@@ -4,12 +4,12 @@ import { getFirestore, collection, onSnapshot , getDocs} from "firebase/firestor
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAg5ZaGoHwM6Wt1601-cHHg2l8OP5P3evg",
+  apiKey: process.env.API_KEY,
   authDomain: "funny-chat-8ff45.firebaseapp.com",
   projectId: "funny-chat-8ff45",
   storageBucket: "funny-chat-8ff45.firebasestorage.app",
   messagingSenderId: "482355079153",
-  appId: "1:482355079153:web:0862da66199d712ad68650",
+  appId: process.env.APP_ID,
   measurementId: "G-FZX7KGWZKM",
 };
 

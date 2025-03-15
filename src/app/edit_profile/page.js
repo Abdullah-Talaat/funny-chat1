@@ -24,6 +24,7 @@ export default function Edit_profile() {
             justifyContent:"space-around",
             height:"80%"
         }}>
+            <title>edit profile</title>
             <div className="share-app" style={{
                 flexDirection:"column",
                 margin:"20px"

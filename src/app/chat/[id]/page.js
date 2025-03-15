@@ -121,6 +121,8 @@ export default function Chat_P() {
               
   return (
     <main>
+      <title>{user1.userName}</title>
+      {/* <link rel="icon" type="image/png" href="./funny messages.png"/> */}
       <div className="list">
         <Link href={`/profile_anther/${id}`}>
           <div className="friend">
@@ -182,7 +184,7 @@ export default function Chat_P() {
         />
         <div className ="btns">
         <button onClick={handleSubmit} >Send</button>
-        <button  onClick={() => setStickM(!stickM)}>stick</button>
+        <button  onClick={() => setStickM(!stickM)}>sticker</button>
         </div>
       </div>
       <div style={stickM ?{
@@ -190,14 +192,14 @@ export default function Chat_P() {
       }: {
         display:"none"
       }} className="stick">
+        <button onClick={() => setStickM(0)} className="close">x</button>
         {
           stickers.map((sticker) => (
             <div className="sticker" onClick={() => handleSticker(sticker.url)}>
               <img src={sticker.url}></img>
-              <p>{sticker.name}</p></div>
+              </div>
           ))
         }
-        <button onClick={() => setStickM(0)} className="close">x</button>
       </div>
       </Suspense>
     </main>

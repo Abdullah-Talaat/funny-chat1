@@ -44,11 +44,12 @@ const handleSearchP = () => {
         const result = privateUsers.filter(user => 
             user.userNum.toString() === searchP.toString()
         );
-        console.log(result)
+    
         setResP([...result]);
     }
     return (
         <main className="m-p">
+            <title>search</title>
             <div className="search-bar s">
                 <input  
                     value={search} 
