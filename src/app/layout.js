@@ -56,7 +56,11 @@ export default function RootLayout({ children }) {
 
     const loginWithToken = () => {
       setLoading(true);
-
+      if(localStorage.getItem("user_token") === null){
+        setLoading(false);
+        return;
+      }
+      // console.log(localStorage.getItem("user_token"))
       const userDataToken1 = localStorage.getItem("user_token");
       const userDataToken = decode(userDataToken1);
       // console.log(userDataToken,"yy")
