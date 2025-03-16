@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react"
 import { UseUser } from "../layout"
 import { db } from "../firebase/firebase_confage"
 import { where, collection, onSnapshot } from "firebase/firestore"
-
+import { decode, encode } from "../sign_up/replacer"
 export default function LogIn() {
     const [userLoginData, setUserLoginData] = useState({
         userNum: 0,

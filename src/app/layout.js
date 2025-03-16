@@ -91,6 +91,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+      <meta property="og:image" content="./share.jpg"/>
       <link rel="icon" type="image/png" href = "./funny messages.png" />
         <title>funny chat</title>
         {/* <link ref={"icon"} href="./funny messages.png"/> */}

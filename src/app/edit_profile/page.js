@@ -24,7 +24,7 @@ export default function Edit_profile() {
             justifyContent:"space-around",
             height:"80%"
         }}>
-            <title>edit profile</title>
+            <title>edit profileŕ</title>
             <div className="share-app" style={{
                 flexDirection:"column",
                 margin:"20px"
@@ -49,7 +49,7 @@ export default function Edit_profile() {
                 </div>
                 <CldUploadWidget uploadPreset={uploadPreset} onSuccess={(result) => {
 
-                    result.event = "success"? setPhotoUrl(result.info.secure_url) : //("thth")
+                    result.event = "success"? setPhotoUrl(result.info.secure_url) : alert("thth")
                 }}>
                     {({ open }) => (<button onClick={open}>Change photo</button>)}
                 </CldUploadWidget>
