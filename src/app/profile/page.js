@@ -10,7 +10,7 @@ import Router from "next/router"
 export default function Profile() {
     const { user } = useContext(UseUser)
     const handleSearch = () => {
-        const herf1 = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/share "
+        const herf1 = "https://api.whatsapp.com/send/?text=join funny chat now!       https://funny-chat1.vercel.app/share "
         window.location.href = "https://api.whatsapp.com/send/?text=join funny chat now!       https://abdullah-t-funny-chat-hjni.vercel.app/share "
         updateDoc(doc(db, "users", user.id),{score:user.score + 100})
         .then(() => {
